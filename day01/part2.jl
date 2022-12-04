@@ -10,7 +10,11 @@ all_calories = split(all_calories, "\n\n")
 # join together
 
 function blocksum(cal)
-    return @pipe cal |> split(_, "\n") |> filter(s -> length(s) != 0, _) |> map(s -> parse(Int64, s), _) |> sum(_)
+    return @pipe cal |>
+                split(_, "\n") |>
+                filter(s -> length(s) != 0, _) |>
+                map(s -> parse(Int64, s), _) |>
+                sum(_)
 end
 
 elves = @pipe all_calories |> map(blocksum, _) |> sort!(_) |> reverse!(_)
